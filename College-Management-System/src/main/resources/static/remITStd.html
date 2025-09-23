@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Management System - Remove Student</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background-image: url('bck.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .remove {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <div class="navbar-nav">
+          <h1 style="color:rgb(1, 1, 100)">COLLEGE MANAGEMENT SYSTEM</h1>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+  <div class="remove">
+    <h2 style="color:rgb(1, 1, 100)">Remove Student</h2>
+    <br>
+    <form id="removeStudentForm">
+      <div class="mb-3">
+        <label for="brn" class="form-label">Branch:</label>
+        <input type="text" id="brn" name="brn" class="form-control" placeholder="Enter branch (CSE/ECE/IT)" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="rno" class="form-label">Roll Number:</label>
+        <input type="number" id="rno" name="rno" class="form-control" placeholder="Enter Roll No" required min="1">
+      </div>
+
+      <button class="btn btn-danger" type="submit">Remove Student</button>
+      <a href="Main.html" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("removeStudentForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const branch = document.getElementById("brn").value.trim().toLowerCase();
+      const rno = document.getElementById("rno").value;
+
+      if (!confirm(`Are you sure you want to remove student ${rno} from ${branch.toUpperCase()}?`)) {
+        return;
+      }
+
+      // ✅ Adjust URL pattern to match your backend controllers
+      const apiUrl = `http://localhost:8080/it/students/${rno}`;
+
+      try {
+        const res = await fetch(apiUrl, { method: "DELETE" });
+
+        if (res.ok) {
+          alert("✅ Student removed successfully!");
+          window.location.href = "Main.html"; // back to dashboard/students list
+        } else {
+          alert("❌ Failed to remove student. Please check the Roll No or Branch.");
+        }
+      } catch (err) {
+        console.error("Error:", err);
+        alert("⚠️ Error connecting to server.");
+      }
+    });
+  </script>
+</body>
+</html>

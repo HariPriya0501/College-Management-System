@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Management System - IT Faculty</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+      body{
+    background-image: url('bck.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.fac{
+    background-color: white;
+}
+.fac table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fac th, .fac td {
+            border: 1px solid black; 
+            text-align: center;
+            padding: 8px;
+            width: calc(100% / 3);
+        }
+
+        .fac th {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <h1 style="color:rgb(1, 1, 100)">COLLEGE MANAGEMENT SYSTEM - IT - FACULTY</h1>
+      </div>
+    </div>
+  </div>
+</nav>
+<br>
+<h2 style="color:rgb(1, 1, 100)">Here's the list of faculty: </h2>
+<br>
+<div class="fac">
+    <table id="facultyTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Branch</th>
+            </tr>
+        </thead>
+        <tbody id="facultyBody"></tbody>
+    </table>
+</div>
+<script>
+  const apiUrl = "http://localhost:8080/it/faculty";
+
+  async function loadFaculty() {
+    try {
+      const res = await fetch(apiUrl);
+      if (!res.ok) throw new Error("Failed to load faculty");
+      const data = await res.json();
+      const tbody = document.getElementById("facultyBody");
+      tbody.innerHTML = "";
+      data.forEach(f => {
+        const row = `
+          <tr>
+            <td>${f.id}</td>
+            <td>${f.name}</td>
+            <td>${f.branch}</td>
+          </tr>`;
+        tbody.innerHTML += row;
+      });
+    } catch (e) {
+      console.error("Error loading faculty:", e);
+    }
+  }
+  document.addEventListener("DOMContentLoaded", loadFaculty);
+</script>
+</body>
+</html>

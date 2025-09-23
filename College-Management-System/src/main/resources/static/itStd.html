@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Management System - IT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+      body{
+    background-image: url('bck.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.fac{
+    background-color: white;
+}
+.fac table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fac th, .fac td {
+            border: 1px solid black; 
+            text-align: center;
+            padding: 8px;
+            width: calc(100% / 4);
+        }
+
+        .fac th {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <h1 style="color:rgb(1, 1, 100)">COLLEGE MANAGEMENT SYSTEM - IT - STUDENTS</h1>
+      </div>
+    </div>
+  </div>
+</nav>
+<br>
+<h2 style="color:rgb(1, 1, 100)">Here's the list of students: </h2>
+<br>
+<div class="fac">
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>Roll No.</th>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Overall CGPA</th>
+            </tr>
+        </thead>
+        <tbody id="studentBody">
+            <!-- Rows will be added dynamically -->
+        </tbody>
+    <br>
+    <a href="addITStd.html" class="btn btn-primary">Click here to add students</a>
+    <a href="remITStd.html" class="btn btn-primary">Click here to remove students</a>
+    <br><br>
+
+     <script>
+    const apiUrl = "http://localhost:8080/it/students"; // Adjust for each branch
+
+    async function loadStudents() {
+        try {
+            const response = await fetch(apiUrl);
+            const students = await response.json();
+
+            const tableBody = document.getElementById("studentBody");
+            tableBody.innerHTML = "";
+
+            students.forEach(s => {
+                let row = `<tr>
+                    <td>${s.rno}</td>
+                    <td>${s.name}</td>
+                    <td>${s.branch}</td>
+                    <td>${s.cgpa}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        } catch (error) {
+            console.error("Error loading students:", error);
+        }
+    }
+    loadStudents();
+</script>
+</div>
+</body>
+</html>
