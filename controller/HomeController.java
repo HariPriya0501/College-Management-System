@@ -8,6 +8,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
+        // Serve the static page from src/main/resources/static/Main.html
         return "redirect:/Main.html";
     }
 }

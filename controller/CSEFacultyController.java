@@ -12,31 +12,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.collegemgmt.College.Management.System.model.ECEFaculty;
-import com.collegemgmt.College.Management.System.repository.ECEFacultyRepository;
+import com.collegemgmt.College.Management.System.model.CSEFaculty;
+import com.collegemgmt.College.Management.System.repository.CSEFacultyRepository;
 
 @RestController
-@RequestMapping("/ece/faculty")
+@RequestMapping("/cse/faculty")
 @CrossOrigin("*")
-public class ECEFacultyController {
+public class CSEFacultyController {
 
     @Autowired
-    private ECEFacultyRepository repo;
+    private CSEFacultyRepository repo;
 
     @GetMapping
-    public List<ECEFaculty> getAll() {
+    public List<CSEFaculty> getAll() {
         return repo.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ECEFaculty> getOne(@PathVariable Integer id) {
+    public ResponseEntity<CSEFaculty> getOne(@PathVariable Integer id) {
         return repo.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ECEFaculty create(@RequestBody ECEFaculty fac) {
+    public CSEFaculty create(@RequestBody CSEFaculty fac) {
         return repo.save(fac);
     }
 }

@@ -1,26 +1,24 @@
-package com.collegemgmt.College.Management.System.model;
+package com.collegemgmt.College.Management.System.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "cse_std")
-public class CSEStudent {
-
-    @Id
-    private Integer rno;  // no @GeneratedValue, you provide roll no
-
+public class StudentResponse {
+    private Integer rno;
     private String name;
-
     private String branch;
+    private Double cgpa;
 
-    private Integer cgpa; // ⚠️ use Integer, since DB column is int
+    public StudentResponse() {}
 
-    // getters/setters
+    public StudentResponse(Integer rno, String name, String branch, Double cgpa) {
+        this.rno = rno;
+        this.name = name;
+        this.branch = branch;
+        this.cgpa = cgpa;
+    }
+
     public Integer getRno() {
         return rno;
     }
+
     public void setRno(Integer rno) {
         this.rno = rno;
     }
@@ -28,6 +26,7 @@ public class CSEStudent {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -35,14 +34,16 @@ public class CSEStudent {
     public String getBranch() {
         return branch;
     }
+
     public void setBranch(String branch) {
         this.branch = branch;
     }
 
-    public Integer getCgpa() {
+    public Double getCgpa() {
         return cgpa;
     }
-    public void setCgpa(Integer cgpa) {
+
+    public void setCgpa(Double cgpa) {
         this.cgpa = cgpa;
     }
 }

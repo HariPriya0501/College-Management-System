@@ -15,30 +15,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.collegemgmt.College.Management.System.model.ECEStudent;
-import com.collegemgmt.College.Management.System.repository.ECEStudentRepository;
+import com.collegemgmt.College.Management.System.model.CSEStudent;
+import com.collegemgmt.College.Management.System.repository.CSEStudentRepository;
 
 @RestController
-@RequestMapping("/ece/students")
+@RequestMapping("/cse/students")
 @CrossOrigin("*")
-public class ECEStudentController {
+public class CSEStudentController {
 
     @Autowired
-    private ECEStudentRepository repo;
+    private CSEStudentRepository repo;
 
     @PostMapping
-    public ECEStudent addStudent(@RequestBody ECEStudent student) {
+    public CSEStudent addStudent(@RequestBody CSEStudent student) {
         return repo.save(student);
     }
 
     @GetMapping
-    public List<ECEStudent> getAllStudents() {
+    public List<CSEStudent> getAllStudents() {
         return repo.findAll();
     }
 
     @GetMapping("/{rno}")
-    public ResponseEntity<ECEStudent> getStudentByRno(@PathVariable Integer rno) {
-        Optional<ECEStudent> student = repo.findById(rno);
+    public ResponseEntity<CSEStudent> getStudentByRno(@PathVariable Integer rno) {
+        Optional<CSEStudent> student = repo.findById(rno);
         if (student.isPresent()) {
             return ResponseEntity.ok(student.get());
         }
@@ -46,10 +46,10 @@ public class ECEStudentController {
     }
 
     @PutMapping("/{rno}")
-    public ResponseEntity<ECEStudent> updateStudent(@PathVariable Integer rno, @RequestBody ECEStudent studentDetails) {
-        Optional<ECEStudent> optionalStudent = repo.findById(rno);
+    public ResponseEntity<CSEStudent> updateStudent(@PathVariable Integer rno, @RequestBody CSEStudent studentDetails) {
+        Optional<CSEStudent> optionalStudent = repo.findById(rno);
         if (optionalStudent.isPresent()) {
-            ECEStudent student = optionalStudent.get();
+            CSEStudent student = optionalStudent.get();
             student.setName(studentDetails.getName());
             student.setBranch(studentDetails.getBranch());
             student.setCgpa(studentDetails.getCgpa());
