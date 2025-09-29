@@ -35,7 +35,7 @@
             <h1 style="color:rgb(1, 1, 100)">COLLEGE MANAGEMENT SYSTEM</h1>
           </div>
           <div class="button">
-            <a href="Main.html" class="btn btn-outline-primary" style="color: white;">Home</a>
+            <a href="cseStd.html" class="btn btn-outline-primary" style="color: white;">Back</a>
           </div>
         </div>
       </div>
@@ -72,7 +72,6 @@
     </div>
 
     <script>
-      // ✅ Change this URL to match your backend API (example: /students or /cse/students)
       document.getElementById("addStudentForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -80,7 +79,7 @@
     rno: parseInt(document.getElementById("rno").value),
     name: document.getElementById("name").value,
     branch: document.getElementById("brn").value,
-    cgpa: parseInt(document.getElementById("cgpa").value)  // must be integer
+    cgpa: parseInt(document.getElementById("cgpa").value)
   };
 
   try {
