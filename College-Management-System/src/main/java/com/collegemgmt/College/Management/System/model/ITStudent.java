@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 public class ITStudent {
 
     @Id
-    private Integer rno;   // ✅ same as DB column
+    private Integer rno;
 
     private String name;
 

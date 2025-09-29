@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 public class ECEStudent {
 
     @Id
-    private Integer rno;   // ✅ same as DB column
+    private Integer rno; 
 
     private String name;
 
@@ -17,7 +17,7 @@ public class ECEStudent {
 
     private Double cgpa;
 
-    // getters/setters
+   
     public Integer getRno() {
         return rno;
     }

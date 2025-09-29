@@ -9,13 +9,13 @@ import jakarta.persistence.Table;
 public class CSEStudent {
 
     @Id
-    private Integer rno;  // no @GeneratedValue, you provide roll no
+    private Integer rno;
 
     private String name;
 
     private String branch;
 
-    private Integer cgpa; // ⚠️ use Integer, since DB column is int
+    private Integer cgpa;
 
     // getters/setters
     public Integer getRno() {
